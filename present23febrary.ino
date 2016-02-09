@@ -207,10 +207,10 @@
         if(MesureTimer.onRestart()) {
 
             // Отображаем состояние аккомулятора
-            lcd.setCursor(0, 0);
+            lcd.setCursor(0, 1);
             
             // Печатаем погодные данные
-            lcd.setCursor(0, 1);
+            lcd.setCursor(0, 0);
 
             auto temperature = bmp.readTemperature();
             auto pressure = bmp.readPressure()/133.322368421;
