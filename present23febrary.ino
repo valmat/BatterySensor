@@ -3,16 +3,24 @@
 #include <RBD_Timer.h>
 #include <RBD_Button.h>
 
+// Управление светодиодами
 #include "MyRGB.h"
 
 
-// Bmp180
+// Bmp180 датчик температоуры и давления
 #include <Wire.h>
 #include <Adafruit_BMP085.h>
 
+// Дополнительные символы для LCD
+#include "PicBat.h"
+
 
 #include <math.h>
-     
+
+    
+    // Кнопка 
+    RBD::Button button(2);
+
     // Инициализируем объект-экран, передаём использованные 
     // для подключения контакты на Arduino в порядке:
     // RS, E, DB4, DB5, DB6, DB7
@@ -26,10 +34,14 @@
     */
     LiquidCrystal lcd(4, 7, 8, 12, 14, 15);
 
-    RBD::Button button(2);
-
+    // Подсветка экрана (включает подсветку через транзистор КТ3102АМ)
     Pino lcdLight(13, Pino::Mode::out);
+    // Статус подсветки
     bool lcdLightState = false;
+
+    // Дополнительные символы для LCD
+    PicBat glyps(lcd);
+    uint8_t TMPVAR = 0; // DEL mE
 
     
     // Connect VCC of the BMP085 sensor to 3.3V (NOT 5.0V!)
@@ -38,7 +50,6 @@
     // Connect SDA to i2c data - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 4
     // EOC is not used, it signifies an end of conversion
     // XCLR is a reset pin, also not used here
-    
     Adafruit_BMP085 bmp;
 
     // Timer
@@ -48,10 +59,8 @@
     // Rgb leds
     MyRGB led1(3,9,0), led2(5,10,16), led3(6,11,1);
 
-    byte mychr[8]   = {B00010,  B00100,  B01000,  B11111,  B00010,  B00100,  B01000,  B00000};
-    byte rozha_l[8] = {B00000,  B01000,  B00000,  B00001,  B00000,  B01000,  B00110,  B00001};
-    byte rozha_r[8] = {B00000,  B00010,  B00000,  B10000,  B00000,  B00010,  B01100,  B10000};
-
+    // Измерение значения на вольтметре
+    Pino rawVoltage(A6);
 
     void printFract(/*const*/ LiquidCrystal &lcd, float val)
     {
@@ -70,10 +79,6 @@
 
         button.invertReading();
         
-        lcd.createChar(1, mychr);
-        lcd.createChar(2, rozha_l);
-        lcd.createChar(3, rozha_r);
-
         
         
         // устанавливаем размер (количество столбцов и строк) экрана
@@ -87,7 +92,7 @@
         lcd.setCursor(0, 1);
         lcd.clear();
         // печатаем вторую строку
-        lcd.print("\x14   non-existent!");
+        //lcd.print("\x14   non-existent!");
 
         if (!bmp.begin()) {
           lcd.setCursor(0, 0);
@@ -206,8 +211,25 @@
         
         if(MesureTimer.onRestart()) {
 
+            //lcd.clear();
             // Отображаем состояние аккомулятора
             lcd.setCursor(0, 1);
+            
+            lcd.print("raw:");
+            lcd.print( rawVoltage.read() );
+            lcd.print("    ");
+            
+            //auto pic_nom = millis()%7;
+            auto pic_nom = TMPVAR%8;
+            
+            lcd.setCursor(11, 1);
+            lcd.print(pic_nom);
+
+            lcd.setCursor(14, 1);
+            glyps.pic(pic_nom);
+            TMPVAR++;
+
+            
             
             // Печатаем погодные данные
             lcd.setCursor(0, 0);
@@ -217,7 +239,7 @@
             
             printFract(lcd, temperature);
             lcd.print("\xDF");
-            lcd.print("C ");
+            lcd.print("C    ");
 
             //printFract(lcd, pressure);
             lcd.print(round(pressure));
