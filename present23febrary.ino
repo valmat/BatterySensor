@@ -10,20 +10,21 @@
 #include <Wire.h>
 #include <Adafruit_BMP085.h>
 
+
 #include <math.h>
      
     // Инициализируем объект-экран, передаём использованные 
     // для подключения контакты на Arduino в порядке:
     // RS, E, DB4, DB5, DB6, DB7
     /*
-    RS  2
-    E   3
-    DB4 4
-    DB5 5
-    DB6 6
-    DB7 7
+    RS  4
+    E   7
+    DB4 8
+    DB5 12
+    DB6 14
+    DB7 15
     */
-    LiquidCrystal lcd(A3, 3, 4, 5, 6, 7);
+    LiquidCrystal lcd(4, 7, 8, 12, 14, 15);
 
     RBD::Button button(2);
 
@@ -41,41 +42,15 @@
     Adafruit_BMP085 bmp;
 
     // Timer
+    // Таймер для имзмерения интервала проведения замеров данных с BMP180
     RBD::Timer MesureTimer;
 
-    byte mychr[8] =
-      {
-        B00010,
-        B00100,
-        B01000,
-        B11111,
-        B00010,
-        B00100,
-        B01000,
-        B00000,
-      };
-    byte rozha_l[8] =
-      {
-        B00000,
-        B01000,
-        B00000,
-        B00001,
-        B00000,
-        B01000,
-        B00110,
-        B00001,
-      };
-    byte rozha_r[8] =
-      {
-        B00000,
-        B00010,
-        B00000,
-        B10000,
-        B00000,
-        B00010,
-        B01100,
-        B10000,
-      };
+    // Rgb leds
+    MyRGB led1(3,9,0), led2(5,10,16), led3(6,11,1);
+
+    byte mychr[8]   = {B00010,  B00100,  B01000,  B11111,  B00010,  B00100,  B01000,  B00000};
+    byte rozha_l[8] = {B00000,  B01000,  B00000,  B00001,  B00000,  B01000,  B00110,  B00001};
+    byte rozha_r[8] = {B00000,  B00010,  B00000,  B10000,  B00000,  B00010,  B01100,  B10000};
 
 
     void printFract(/*const*/ LiquidCrystal &lcd, float val)
@@ -92,6 +67,7 @@
     void setup() 
     {
         //lcdLight.off();
+
         button.invertReading();
         
         lcd.createChar(1, mychr);
@@ -101,7 +77,7 @@
         
         
         // устанавливаем размер (количество столбцов и строк) экрана
-        //lcd.begin(16, 2);
+        lcd.begin(16, 2);
         // печатаем первую строку
         //lcd.print("\2\3    Time is");
         
@@ -123,6 +99,45 @@
         MesureTimer.setTimeout(3000);
         MesureTimer.restart();
 
+
+        led1.off().onR();
+        led2.off().onR();
+        led3.off().onR();
+        delay(700);
+        led1.off().onG();
+        led2.off().onG();
+        led3.off().onG();
+        delay(800);
+        led1.off().onB();
+        led2.off().onB();
+        led3.off().onB();        
+        delay(900);
+        led1.offB().onR().onG();
+        led2.offB().onR().onG();
+        led3.offB().onR().onG();
+        delay(1100);
+        led1.off().onR();
+        led2.off().onG();
+        led3.off().onB();
+        delay(2000);
+
+
+
+            lcd.setCursor(0, 1);
+
+            auto temperature = bmp.readTemperature();
+            auto pressure = bmp.readPressure()/133.322368421;
+            
+            printFract(lcd, temperature);
+            lcd.print("\xDF");
+            lcd.print("C ");
+
+            //printFract(lcd, pressure);
+            lcd.print(round(pressure));
+            //lcd.println(" MM PT.CT.");
+            lcd.print("MM");
+
+
     }
      
     void loop() 
@@ -134,20 +149,42 @@
 
         if(button.onPressed()) {
           
-          lcd.clear();
-          lcd.print("Button Pressed");
+          //lcd.clear();
+          //lcd.print("Button Pressed");
         }
        
         if(button.onReleased()) {
-          lcd.clear();
-          lcd.print("Button Released");
+          //lcd.clear();
+          //lcd.print("Button Released");
 
           lcdLightState = !lcdLightState;
           lcdLight.turn(lcdLightState);
         }
 
+        /*
+        led1.off().onR();
+        led2.off().onR();
+        led3.off().onR();
+        delay(700);
+        led1.off().onG();
+        led2.off().onG();
+        led3.off().onG();
+        delay(800);
+        led1.off().onB();
+        led2.off().onB();
+        led3.off().onB();        
+        delay(900);
+        led1.offB().onR().onG();
+        led2.offB().onR().onG();
+        led3.offB().onR().onG();
+        delay(1100);
+        led1.off().onR();
+        led2.off().onG();
+        led3.off().onB();
+        delay(2000);
+        */
 
-        
+
         /*
         auto temperature = bmp.readTemperature();
         temperature = round(temperature*10)/10;
@@ -169,6 +206,10 @@
         
         if(MesureTimer.onRestart()) {
 
+            // Отображаем состояние аккомулятора
+            lcd.setCursor(0, 0);
+            
+            // Печатаем погодные данные
             lcd.setCursor(0, 1);
 
             auto temperature = bmp.readTemperature();
