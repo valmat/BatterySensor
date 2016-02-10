@@ -8,7 +8,7 @@
 #pragma once
 
 #include <LiquidCrystal.h>
-#include <Pino.h>
+//#include <Pino.h>
 
 #include <math.h>
 
@@ -18,6 +18,9 @@
 // Bmp180 датчик температоуры и давления
 #include <Wire.h>
 #include <Adafruit_BMP085.h>
+
+// Состаяние аккомулятора
+#include "Battery.h"
 
 
 
@@ -44,7 +47,7 @@ public:
     LCDwrapper ( LCDwrapper && ) = default;
 
     // Отображает необходимую информацию
-    void show(Adafruit_BMP085 &bmp, Pino &rawVoltage);
+    void show(Adafruit_BMP085 &bmp, Battery &bat);
 
     LCDwrapper& setCursor(uint8_t row, uint8_t col)
     {

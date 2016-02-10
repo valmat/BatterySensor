@@ -16,10 +16,8 @@
 // Состаяние аккомулятора
 #include "Battery.h"
 
-
-
 // Все настройки в.т.ч номера пинов в Configs.h
-
+#include "Configs.h"
 
     
 // Кнопка 
@@ -47,7 +45,8 @@ MyRGB led1(Configs::led1R, Configs::led1G, Configs::led1B),
 
 
 // Измерение значения на вольтметре
-Pino rawVoltage(Configs::rawVoltage);
+Battery bat(Configs::rawVoltage);
+
 
  
 void setup() 
@@ -68,7 +67,7 @@ void setup()
 
 
     // Стартовое отображение информации о погодных данных и состоянии аккомклятора
-    lcd.show(bmp ,rawVoltage);
+    lcd.show(bmp, bat);
 
 
     led1.off().onR();
@@ -90,7 +89,7 @@ void loop()
     
     if(MesureTimer.onRestart()) {
         // Печатаем погодные данные
-        lcd.show(bmp ,rawVoltage);
+        lcd.show(bmp, bat);
     }
 }
 

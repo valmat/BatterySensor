@@ -11,7 +11,7 @@ void LCDwrapper::printFract(float val)
     _lcd.print( (int)fract );
 }
 
-void LCDwrapper::show(Adafruit_BMP085 &bmp, Pino &rawVoltage)
+void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
 {
     //
     // Печатаем погодные данные
@@ -42,7 +42,7 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Pino &rawVoltage)
     _lcd.setCursor(0, 1);
     
     _lcd.print("raw:");
-    _lcd.print( rawVoltage.read() );
+    _lcd.print( bat.raw() );
     _lcd.print("    ");
     
     /*

@@ -24,13 +24,13 @@ public:
     // Move constructor
     PicBat ( PicBat && ) = default;
 
-    void pic(uint8_t nom)
+    void pic(uint8_t nom) const
     {
         if(nom < 8) _lcd.write(nom);
         //if(nom < 8) _lcd.print(nom, BYTE);
     }
 
-    void picD()
+    void picD() const
     {
         _lcd.write(7);
     }
