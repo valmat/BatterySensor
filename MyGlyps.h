@@ -26,10 +26,10 @@ public:
 
     void pic(uint8_t nom) const
     {
-        if(nom < 8) _lcd.write(nom);
-        //if(nom < 8) _lcd.print(nom, BYTE);
+        if(nom < 7) _lcd.write(nom);
     }
 
+    // Выводит русскую букву "Д"
     void picD() const
     {
         _lcd.write(7);

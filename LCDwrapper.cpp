@@ -8,7 +8,7 @@ void LCDwrapper::printFract(float val)
 
     _lcd.print( (int)val );
     _lcd.print( '.' );
-    _lcd.print( (int)fract );
+    _lcd.print( fract );
 }
 
 void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
@@ -38,11 +38,36 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
     //
     // Отображаем состояние аккомулятора
     //
+    auto batState    = bat.state();
+    // измеряемое напряжение на пине
+    auto mesVoltage  = batState.mesVoltage();
+    // Вычисляемое напряжение батареи
+    auto calcVoltage = batState.calcVoltage();
+    // Проценты
+    auto percent     = batState.percent();
+
+
     //lcd.clear();
     _lcd.setCursor(0, 1);
     
-    _lcd.print("raw:");
-    _lcd.print( bat.raw() );
+    // Выводим значек батареи
+    picBat(percent);
+
+    _lcd.print(":");
+    _lcd.print( batState.raw() );
+
+    _lcd.print(":");
+    _lcd.print(percent );
+
+    _lcd.print(":");
+    //_lcd.print( mesVoltage );
+    printFract(mesVoltage);
+
+    _lcd.print(":");
+    //_lcd.print( calcVoltage );
+    printFract(calcVoltage);
+
+
     _lcd.print("    ");
     
     /*
@@ -56,4 +81,26 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
     glyps.pic(pic_nom);
     TMPVAR++;
     */
+}
+
+void LCDwrapper::picBat(uint8_t percent)
+{
+    if(percent >= 90) {
+        // full
+        _glyps.pic(6);
+    } else if (percent < 10) {
+        // empty
+        _glyps.pic(0);
+        
+    } else if (percent < 26 ) {
+        _glyps.pic(1);
+    } else if (percent < 42 ) {
+        _glyps.pic(2);
+    } else if (percent < 58 ) {
+        _glyps.pic(3);
+    } else if (percent < 74 ) {
+        _glyps.pic(4);
+    } else if (percent < 90 ) {
+        _glyps.pic(5);
+    }
 }

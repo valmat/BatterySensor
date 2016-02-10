@@ -46,7 +46,7 @@ struct Configs
     // Raw voltage pin
     // See ~/opt/arduino-1.6.6/hardware/arduino/avr/variants/standard/pins_arduino.h
     // A6 = 20
-    constexpr static uint8_t rawVoltage = 20;
+    constexpr static uint8_t voltagePin = 20;
 
     
     // Интервал проведения измерений погодных данных

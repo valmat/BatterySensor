@@ -55,17 +55,22 @@ public:
         return *this;
     }
 
+    // Печатает строку на экране
     LCDwrapper& print(const char * str)
     {
         _lcd.print(str);
         return *this;
     }
 
+    // переключает подсветку экрана в другое состояние
     void turnLight()
     {
         _lcdLightState = !_lcdLightState;
         _lcdLight.turn(_lcdLightState);
     }
+
+    // Печатает значек батареи в зависимости от процента заряда
+    void picBat(uint8_t percent);
 
 
 

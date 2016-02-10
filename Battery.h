@@ -93,7 +93,7 @@ public:
         }
 
         return round(lA * _calcVoltage + lB);
-        
+
         /*
         if(_calcVoltage < 12.4) {
             const float lA = linefunA(12.0, 12.4, 0, 10);
@@ -225,12 +225,6 @@ public:
     BatteryState state() const
     {
         return BatteryState(_pin.read());
-    }
-
-    // Возвращает сырые данные с пина
-    uint16_t raw() const
-    {
-        return _pin.read();
     }
 
 private:

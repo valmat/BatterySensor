@@ -23,6 +23,9 @@
 // Кнопка 
 RBD::Button button(Configs::button);
 
+// Измерение значения на вольтметре
+Battery bat(Configs::voltagePin);
+
 
 // Инициализируем объект-экран, передаём использованные 
 LCDwrapper lcd(Configs::lcdRS, Configs::lcdE, Configs::lcdDB4, Configs::lcdDB5, Configs::lcdDB6, Configs::lcdDB7, Configs::lcdLight);
@@ -44,8 +47,6 @@ MyRGB led1(Configs::led1R, Configs::led1G, Configs::led1B),
       led3(Configs::led3R, Configs::led3G, Configs::led3B);
 
 
-// Измерение значения на вольтметре
-Battery bat(Configs::rawVoltage);
 
 
  
