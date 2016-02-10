@@ -30,7 +30,10 @@ public:
         //if(nom < 8) _lcd.print(nom, BYTE);
     }
 
-
+    void picD()
+    {
+        _lcd.write(7);
+    }
 
 private:
     LiquidCrystal &_lcd;

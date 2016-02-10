@@ -24,14 +24,12 @@
     // Инициализируем объект-экран, передаём использованные 
     // для подключения контакты на Arduino в порядке:
     // RS, E, DB4, DB5, DB6, DB7
-    /*
-    RS  4
-    E   7
-    DB4 8
-    DB5 12
-    DB6 14
-    DB7 15
-    */
+    // RS  --> 4
+    // E   --> 7
+    // DB4 --> 8
+    // DB5 --> 12
+    // DB6 --> 14
+    // DB7 --> 15
     LiquidCrystal lcd(4, 7, 8, 12, 14, 15);
 
     // Подсветка экрана (включает подсветку через транзистор КТ3102АМ)
@@ -44,12 +42,8 @@
     uint8_t TMPVAR = 0; // DEL mE
 
     
-    // Connect VCC of the BMP085 sensor to 3.3V (NOT 5.0V!)
-    // Connect GND to Ground
     // Connect SCL to i2c clock - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 5
     // Connect SDA to i2c data - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 4
-    // EOC is not used, it signifies an end of conversion
-    // XCLR is a reset pin, also not used here
     Adafruit_BMP085 bmp;
 
     // Timer
@@ -105,6 +99,7 @@
         MesureTimer.restart();
 
 
+        /*
         led1.off().onR();
         led2.off().onR();
         led3.off().onR();
@@ -121,10 +116,11 @@
         led2.offB().onR().onG();
         led3.offB().onR().onG();
         delay(1100);
+        */
         led1.off().onR();
         led2.off().onG();
         led3.off().onB();
-        delay(2000);
+        //delay(2000);
 
 
 
@@ -229,6 +225,7 @@
             glyps.pic(pic_nom);
             TMPVAR++;
 
+
             
             
             // Печатаем погодные данные
@@ -237,14 +234,18 @@
             auto temperature = bmp.readTemperature();
             auto pressure = bmp.readPressure()/133.322368421;
             
+            lcd.print("T:");
             printFract(lcd, temperature);
             lcd.print("\xDF");
             lcd.print("C    ");
 
+            lcd.setCursor(9, 0);
             //printFract(lcd, pressure);
+            glyps.picD();
+            lcd.print(":");
             lcd.print(round(pressure));
             //lcd.println(" MM PT.CT.");
-            lcd.print("MM");
+            lcd.print("MM  ");
         }
 
 
