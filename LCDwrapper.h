@@ -25,9 +25,6 @@ class LCDwrapper
 {
 public:
     // Constructors
-    //LCDwrapper(LiquidCrystal &lcd, uint8_t ledpin): _lcd(lcd) {}
-
-
     LCDwrapper(uint8_t rs,uint8_t e,uint8_t db4,uint8_t db5,uint8_t db6,uint8_t db7, uint8_t led):
         _lcd(rs, e, db4, db5, db6, db7),
         _lcdLight(led, Pino::Mode::out),
