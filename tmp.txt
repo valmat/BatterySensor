@@ -1,0 +1,60 @@
+        /*
+        led1.off().onR();
+        led2.off().onR();
+        led3.off().onR();
+        delay(700);
+        led1.off().onG();
+        led2.off().onG();
+        led3.off().onG();
+        delay(800);
+        led1.off().onB();
+        led2.off().onB();
+        led3.off().onB();        
+        delay(900);
+        led1.offB().onR().onG();
+        led2.offB().onR().onG();
+        led3.offB().onR().onG();
+        delay(1100);
+        */
+
+
+        /*
+        led1.off().onR();
+        led2.off().onR();
+        led3.off().onR();
+        delay(700);
+        led1.off().onG();
+        led2.off().onG();
+        led3.off().onG();
+        delay(800);
+        led1.off().onB();
+        led2.off().onB();
+        led3.off().onB();        
+        delay(900);
+        led1.offB().onR().onG();
+        led2.offB().onR().onG();
+        led3.offB().onR().onG();
+        delay(1100);
+        led1.off().onR();
+        led2.off().onG();
+        led3.off().onB();
+        delay(2000);
+        */
+
+
+        /*
+        auto temperature = bmp.readTemperature();
+        temperature = round(temperature*10)/10;
+
+        auto pressure = bmp.readPressure()/133.322368421;
+        pressure = round(pressure*10)/10;
+        
+        lcd.setCursor(0, 1);
+        //lcd.print("T:");
+        lcd.print(temperature);
+        lcd.print("*C ");
+        
+        //lcd.print("P: ");
+        lcd.print(pressure);
+        lcd.println(" MM PT.CT.");
+        */
