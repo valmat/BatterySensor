@@ -56,9 +56,10 @@ public:
     }
 
     // Печатает строку на экране
-    LCDwrapper& print(const char * str)
+    template<typename T>
+    LCDwrapper& print(T val)
     {
-        _lcd.print(str);
+        _lcd.print(val);
         return *this;
     }
 

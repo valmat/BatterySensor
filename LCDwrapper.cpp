@@ -100,7 +100,7 @@ void LCDwrapper::picBat(uint8_t percent)
         _glyps.pic(3);
     } else if (percent < 74 ) {
         _glyps.pic(4);
-    } else if (percent < 90 ) {
+    } else { // if (percent < 90 )
         _glyps.pic(5);
     }
 }

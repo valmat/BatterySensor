@@ -7,6 +7,7 @@
 
 // Управление светодиодами
 #include "MyRGB.h"
+#include "LedBox.h"
 
 
 // Bmp180 датчик температоуры и давления
@@ -37,16 +38,18 @@ LCDwrapper lcd(Configs::lcdRS, Configs::lcdE, Configs::lcdDB4, Configs::lcdDB5, 
 // Connect SDA to i2c data - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 4
 Adafruit_BMP085 bmp;
 
-// Timer
 // Таймер для имзмерения интервала проведения замеров данных с BMP180
 RBD::Timer MesureTimer;
+
+// Таймер для имзмерения интервала обновления индикации светодиодов
+RBD::Timer LedTimer;
 
 // Rgb leds
 MyRGB led1(Configs::led1R, Configs::led1G, Configs::led1B), 
       led2(Configs::led2R, Configs::led2G, Configs::led2B), 
       led3(Configs::led3R, Configs::led3G, Configs::led3B);
 
-
+LedBox leds(led1, led2, led3);
 
 
  
@@ -65,32 +68,36 @@ void setup()
 
     MesureTimer.setTimeout(Configs::MesureTimeout);
     MesureTimer.restart();
+    
+    LedTimer.setTimeout(Configs::LedTimeout);
+    LedTimer.restart();
+
+    
 
 
     // Стартовое отображение информации о погодных данных и состоянии аккомклятора
     lcd.show(bmp, bat);
 
-
-    led1.off().onR();
-    led2.off().onG();
-    led3.off().onB();
-
+    // Приветственное моргание светодиодами при включении
+    leds.hello();
 }
- 
+
 void loop() 
 {
-
-    if(button.onPressed()) {
-    }
+    //if(button.onPressed()) {}
    
     if(button.onReleased()) {
         lcd.turnLight();
     }
 
-    
     if(MesureTimer.onRestart()) {
         // Печатаем погодные данные
         lcd.show(bmp, bat);
+    }
+    
+    if(LedTimer.onRestart()) {
+        // Индикация состояния батареи на светодиодах
+        leds.showBat(bat.state().percent());
     }
 }
 

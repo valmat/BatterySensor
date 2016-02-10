@@ -53,6 +53,9 @@ struct Configs
     // 3с = 3000 милисекунд
     constexpr static unsigned long MesureTimeout = 3000;
 
+    // Интервал переиндикации светодиодами состояния батареи
+    constexpr static unsigned long LedTimeout = 301;
+
 
 
 

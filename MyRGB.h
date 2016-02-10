@@ -122,6 +122,25 @@ public:
         return turnB(_is_on_b);
     }
 
+    //
+    // показывать только определенный цвет
+    //
+    MyRGB& red()
+    {
+        return onR().offG().offB();
+    }
+    MyRGB& green()
+    {
+        return offR().onG().offB();
+    }
+    MyRGB& blue()
+    {
+        return offR().offG().onB();
+    }
+    MyRGB& orange()
+    {
+        return onR().onG().offB();
+    }
 
 private:
     
