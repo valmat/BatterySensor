@@ -13,16 +13,16 @@
 //#include "binary.h"
 
 
-class PicBat
+class MyGlyps
 {
 public:
     // Constructors
-    PicBat(LiquidCrystal &lcd);
+    MyGlyps(LiquidCrystal &lcd);
 
     // Copy constructor
-    PicBat( const PicBat& ) = default;
+    MyGlyps( const MyGlyps& ) = default;
     // Move constructor
-    PicBat ( PicBat && ) = default;
+    MyGlyps ( MyGlyps && ) = default;
 
     void pic(uint8_t nom) const
     {

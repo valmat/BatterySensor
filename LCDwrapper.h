@@ -13,7 +13,7 @@
 #include <math.h>
 
  // Дополнительные символы для LCD
-#include "PicBat.h"
+#include "MyGlyps.h"
 
 // Bmp180 датчик температоуры и давления
 #include <Wire.h>
@@ -84,5 +84,5 @@ private:
     bool _lcdLightState = false;
     
     // Дополнительные символы для LCD
-    PicBat _glyps;
+    MyGlyps _glyps;
 };

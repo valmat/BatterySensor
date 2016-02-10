@@ -5,10 +5,10 @@
  */
 
 //#include <stdint.h>
-#include "PicBat.h"
+#include "MyGlyps.h"
 
 // Constructors
-PicBat::PicBat(LiquidCrystal &lcd) : _lcd(lcd)
+MyGlyps::MyGlyps(LiquidCrystal &lcd) : _lcd(lcd)
 {
     lcd.createChar(0, pics[0]);
     lcd.createChar(1, pics[1]);
@@ -20,7 +20,7 @@ PicBat::PicBat(LiquidCrystal &lcd) : _lcd(lcd)
     lcd.createChar(7, pics[7]);
 }
 
-uint8_t PicBat::pics[8][8] = {
+uint8_t MyGlyps::pics[8][8] = {
     {
         // 0
         0b01110,
