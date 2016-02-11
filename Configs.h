@@ -11,6 +11,8 @@ struct Configs
 {
     // Button pin nom
     constexpr static uint8_t button = 2;
+    // Button Debounce Timeout
+    constexpr static uint8_t buttonDebounce = 30;
 
     // Инициализируем объект-экран, передаём использованные 
     // для подключения контакты на Arduino в порядке:
@@ -48,15 +50,16 @@ struct Configs
     // A6 = 20
     constexpr static uint8_t voltagePin = 20;
 
-    
     // Интервал проведения измерений погодных данных
     // 3с = 3000 милисекунд
-    constexpr static unsigned long MesureTimeout = 3000;
+    constexpr static uint32_t MesureTimeout = 10000;
 
     // Интервал переиндикации светодиодами состояния батареи
-    constexpr static unsigned long LedTimeout = 301;
+    constexpr static uint32_t LedTimeout = 301;
 
-
+    // Время долгого удержания кнопки
+    // Удержание кнопки в течении этого времени считается долгим
+    constexpr static uint16_t longPressTime = 750;
 
 
 

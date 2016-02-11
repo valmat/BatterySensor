@@ -27,8 +27,39 @@ public:
     // отображает состояние батареи в зависимости от процента заряда
     void showBat(uint8_t percent);
 
+    void on()
+    {
+        _isOn = true;
+        _led1.on();
+        _led2.on();
+        _led3.on();
+    }
+    void off()
+    {
+        _isOn = false;
+        _led1.off();
+        _led2.off();
+        _led3.off();
+    }
+
+    void turn(bool to)
+    {
+        _isOn = to;
+        if(to) {
+            on();
+        } else {
+            off();
+        }
+    }
+
+    void toogle()
+    {
+        turn(!_isOn);
+    }
+
 private:
 
+    bool _isOn = true;
     MyRGB & _led1;
     MyRGB & _led2;
     MyRGB & _led3;

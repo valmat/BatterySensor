@@ -64,7 +64,7 @@ public:
     }
 
     // переключает подсветку экрана в другое состояние
-    void turnLight()
+    void toogleLight()
     {
         _lcdLightState = !_lcdLightState;
         _lcdLight.turn(_lcdLightState);
@@ -87,7 +87,7 @@ private:
     Pino _lcdLight;
     
     // Статус подсветки
-    bool _lcdLightState = false;
+    bool _lcdLightState = true;
     
     // Дополнительные символы для LCD
     MyGlyps _glyps;

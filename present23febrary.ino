@@ -23,6 +23,8 @@
     
 // Кнопка 
 RBD::Button button(Configs::button);
+// Время, когда кнопка была нажата
+uint32_t buttonStart = 0;
 
 // Измерение значения на вольтметре
 Battery bat(Configs::voltagePin);
@@ -30,7 +32,6 @@ Battery bat(Configs::voltagePin);
 
 // Инициализируем объект-экран, передаём использованные 
 LCDwrapper lcd(Configs::lcdRS, Configs::lcdE, Configs::lcdDB4, Configs::lcdDB5, Configs::lcdDB6, Configs::lcdDB7, Configs::lcdLight);
-
 
 
 // Инициализируем погодный датчик
@@ -57,22 +58,20 @@ void setup()
 {
     // Настраиваем кнопку в соответствии с нашей схемой подключения
     button.invertReading();
-    
+    button.setDebounceTimeout(Configs::buttonDebounce);
     
     if (!bmp.begin()) {
         lcd.setCursor(0, 0);
-        // печатаем вторую строку
         lcd.print("Could not find a valid BMP085 sensor, check wiring!");
         while(1);
     }
 
+    // Таймеры для обновления отображаемой информации
     MesureTimer.setTimeout(Configs::MesureTimeout);
     MesureTimer.restart();
     
     LedTimer.setTimeout(Configs::LedTimeout);
     LedTimer.restart();
-
-    
 
 
     // Стартовое отображение информации о погодных данных и состоянии аккомклятора
@@ -80,14 +79,26 @@ void setup()
 
     // Приветственное моргание светодиодами при включении
     leds.hello();
+    leds.on();
+    leds.showBat(bat.state().percent());
 }
 
 void loop() 
 {
-    //if(button.onPressed()) {}
-   
-    if(button.onReleased()) {
-        lcd.turnLight();
+    if(button.onPressed()) {
+        buttonStart = millis();
+    }
+
+    // If was pressed and released
+    // Из-за глюка в RBD::Button нужно проверять была ли кнопка предварительно нажата
+    if(buttonStart > 0 && button.onReleased()) {
+        if( millis() - buttonStart < Configs::longPressTime) {
+            lcd.toogleLight();
+        } else {
+           leds.toogle();
+        }
+        // Сбрасываем флаг нажатости
+        buttonStart = 0;
     }
 
     if(MesureTimer.onRestart()) {

@@ -45,6 +45,7 @@ void LedBox::hello()
 // отображает состояние батареи в зависимости от процента заряда
 void LedBox::showBat(uint8_t percent)
 {
+    if(!_isOn) return;
 
     if(percent >= 99) {
         // Идет зарядка
