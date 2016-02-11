@@ -23,11 +23,11 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
     
     _lcd.print("T:");
     printFract(temperature);
+    // °C
     _lcd.print("\xDF");
     _lcd.print("C    ");
 
     _lcd.setCursor(9, 0);
-    //printFract(pressure);
     _glyps.picD();
     _lcd.print(":");
     _lcd.print(round(pressure));
@@ -70,17 +70,6 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
 
     _lcd.print("    ");
     
-    /*
-    //auto pic_nom = millis()%7;
-    auto pic_nom = TMPVAR%8;
-    
-    _lcd.setCursor(11, 1);
-    _lcd.print(pic_nom);
-
-    _lcd.setCursor(14, 1);
-    glyps.pic(pic_nom);
-    TMPVAR++;
-    */
 }
 
 void LCDwrapper::picBat(uint8_t percent)

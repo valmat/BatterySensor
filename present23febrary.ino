@@ -34,7 +34,7 @@ Battery bat(Configs::voltagePin);
 LCDwrapper lcd(Configs::lcdRS, Configs::lcdE, Configs::lcdDB4, Configs::lcdDB5, Configs::lcdDB6, Configs::lcdDB7, Configs::lcdLight);
 
 
-// Инициализируем погодный датчик
+// Инициализируем погодный датчик BMP180
 // Connect SCL to i2c clock - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 5
 // Connect SDA to i2c data - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 4
 Adafruit_BMP085 bmp;
@@ -53,7 +53,6 @@ MyRGB led1(Configs::led1R, Configs::led1G, Configs::led1B),
 LedBox leds(led1, led2, led3);
 
 
- 
 void setup() 
 {
     // Настраиваем кнопку в соответствии с нашей схемой подключения

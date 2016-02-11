@@ -24,7 +24,7 @@ public:
     MyRGB ( MyRGB && ) = default;
 
     // Turn on Red
-/*    const*/ MyRGB& onR() /*const*/
+    MyRGB& onR()
     {
         // commands are inverted, because my RGB led has common anode
         _r.off();
@@ -33,14 +33,14 @@ public:
         return *this;
     }
     // Turn on Green
-    /*const*/ MyRGB& onG() /*const*/
+    MyRGB& onG()
     {
         _g.off();
         _is_on_g = true;
         return *this;
     }
     // Turn on Blue
-    /*const*/ MyRGB& onB() /*const*/
+    MyRGB& onB()
     {
         _b.off();
         _is_on_b = true;
@@ -48,21 +48,21 @@ public:
     }
 
     // Turn off Red
-    /*const*/ MyRGB& offR() /*const*/
+    MyRGB& offR()
     {
         _r.on();
         _is_on_r = false;
         return *this;
     }
     // Turn off Green
-    /*const*/ MyRGB& offG() /*const*/
+    MyRGB& offG()
     {
         _g.on();
         _is_on_g = false;
         return *this;
     }
     // Turn off Blue
-    /*const*/ MyRGB& offB() /*const*/
+    MyRGB& offB()
     {
         _b.on();
         _is_on_b = false;
@@ -70,33 +70,34 @@ public:
     }
 
     // Turn off all colors
-    /*const*/ MyRGB& off() /*const*/
+    MyRGB& off()
     {
         return offR().offG().offB();
     }
     
     // Turn on all colors
-    /*const*/ MyRGB& on() /*const*/
+    MyRGB& on()
     {
         return onR().onG().onB();
     }
 
     // turn Red to value
-    /*const*/ MyRGB& turnR(bool value) /*const*/
+    MyRGB& turnR(bool value)
     {
-        _r.turn(!value); // commands are inverted, because my RGB led has common anode
+        // commands are inverted, because my RGB led has common anode
+        _r.turn(!value); 
         _is_on_r = value;
         return *this;
     }
     // turn Green to value
-    /*const*/ MyRGB& turnG(bool value) /*const*/
+    MyRGB& turnG(bool value)
     {
         _g.turn(!value);
         _is_on_g = value;
         return *this;
     }
     // turn Blue to value
-    /*const*/ MyRGB& turnB(bool value) /*const*/
+    MyRGB& turnB(bool value)
     {
         _b.turn(!value);
         _is_on_b = value;
@@ -104,19 +105,19 @@ public:
     }
 
     // toogle Red
-    /*const*/ MyRGB& toogleR() /*const*/
+    MyRGB& toogleR()
     {
         _is_on_r = !_is_on_r;
         return turnR(_is_on_r);
     }
     // toogle Green
-    /*const*/ MyRGB& toogleG() /*const*/
+    MyRGB& toogleG()
     {
         _is_on_g = !_is_on_g;
         return turnG(_is_on_g);
     }
     // toogle Blue
-    /*const*/ MyRGB& toogleB() /*const*/
+    MyRGB& toogleB()
     {
         _is_on_b = !_is_on_b;
         return turnB(_is_on_b);
@@ -137,10 +138,16 @@ public:
     {
         return offR().offG().onB();
     }
-    MyRGB& orange()
+    MyRGB& yellow()
     {
         return onR().onG().offB();
     }
+    MyRGB& purple()
+    {
+        return onR().offG().onB();
+    }
+    
+
 
 private:
     

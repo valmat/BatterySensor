@@ -61,6 +61,4 @@ struct Configs
     // Удержание кнопки в течении этого времени считается долгим
     constexpr static uint16_t longPressTime = 750;
 
-
-
 };

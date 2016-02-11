@@ -93,51 +93,6 @@ public:
         }
 
         return round(lA * _calcVoltage + lB);
-
-        /*
-        if(_calcVoltage < 12.4) {
-            const float lA = linefunA(12.0, 12.4, 0, 10);
-            const float lB = linefunB(12.0, 12.4, 0, 10);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 12.8) {
-            const float lA = linefunA(12.4, 12.8, 10, 20);
-            const float lB = linefunB(12.4, 12.8, 10, 20);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 12.9) {
-            const float lA = linefunA(12.8, 12.9, 20, 30);
-            const float lB = linefunB(12.8, 12.9, 20, 30);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 13.0) {
-            const float lA = linefunA(12.9, 13.0, 30, 40);
-            const float lB = linefunB(12.9, 13.0, 30, 40);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 13.1) {
-            const float lA = linefunA(13.0, 13.1, 40, 50);
-            const float lB = linefunB(13.0, 13.1, 40, 50);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 13.2) {
-            const float lA = linefunA(13.1, 13.2, 50, 60);
-            const float lB = linefunB(13.1, 13.2, 50, 60);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 13.3) {
-            const float lA = linefunA(13.2, 13.3, 60, 70);
-            const float lB = linefunB(13.2, 13.3, 60, 70);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 13.4) {
-            const float lA = linefunA(13.3, 13.4, 70, 80);
-            const float lB = linefunB(13.3, 13.4, 70, 80);
-            return round(lA * _calcVoltage + lB);
-        } else if (_calcVoltage < 14.0) {
-            const float lA = linefunA(13.4, 14.0, 80, 90);
-            const float lB = linefunB(13.4, 14.0, 80, 90);
-            return round(lA * _calcVoltage + lB);
-        } else { //if (_calcVoltage <= 14.5)
-            const float lA = linefunA(14.0, 14.5, 90, 100);
-            const float lB = linefunB(14.0, 14.5, 90, 100);
-            return round(lA * _calcVoltage + lB);
-        }
-        */
-
     }
 
 
@@ -161,15 +116,9 @@ private:
 
     // Для вычисления процентов нам нужно будет уравнение прямой
     // y(x) = (y2-y1)/(x2-x1) * x + (y1*x2 - y2*x1)/(x2-x1)
-    //float linefun(float x1, float x2, float y1, float y2, float x)
-    //{
-    //    return x * (y2-y1)/(x2-x1) + (y1*x2 - y2*x1)/(x2-x1);
-    //}
-
-    // Для вычисления процентов нам нужны будут коэфициенты прямой
+    // и коэфициенты уравнения прямой:
     // y(x) = A *x + B
     // Вычисление коэфициентов на этапе компиляции намного эффективнее 
-    // realtime вычисления
     constexpr static float linefunA(float x1, float x2, float y1, float y2)
     {
         return (y2-y1)/(x2-x1);

@@ -10,29 +10,29 @@ void LedBox::hello()
     _led2.on();
     _led3.on();
     delay(timeout);
-    _led1.off().onR();
+    _led1.red();
     delay(timeout);
-    _led1.offB().onR().onG();
-    _led2.off().onR();
+    _led1.yellow();
+    _led2.red();
     delay(timeout);
-    _led1.off().onG();
-    _led2.offB().onR().onG();
-    _led3.off().onR();
+    _led1.green();
+    _led2.yellow();
+    _led3.red();
     delay(timeout);
-    _led1.off().onB();
-    _led2.off().onG();
-    _led3.offB().onR().onG();
+    _led1.blue();
+    _led2.green();
+    _led3.yellow();
     delay(timeout);
-    _led1.offG().onR().onB();
-    _led2.off().onB();
-    _led3.off().onG();
+    _led1.purple();
+    _led2.blue();
+    _led3.green();
     delay(timeout);
     _led1.off();
-    _led2.offG().onR().onB();
-    _led3.off().onB();
+    _led2.purple();
+    _led3.blue();
     delay(timeout);
     _led2.off();
-    _led3.offG().onR().onB();
+    _led3.purple();
     delay(timeout);
     _led3.off();
     delay(timeout);
@@ -67,25 +67,25 @@ void LedBox::showBat(uint8_t percent)
         
         
     } else if (percent < 26 ) {
-        _led1.orange();
+        _led1.yellow();
         _led2.red();
         _led3.red();
     } else if (percent < 42 ) {
-        _led1.orange();
-        _led2.orange();
+        _led1.yellow();
+        _led2.yellow();
         _led3.red();
     } else if (percent < 58 ) {
-        _led1.orange();
-        _led2.orange();
-        _led3.orange();
+        _led1.yellow();
+        _led2.yellow();
+        _led3.yellow();
     } else if (percent < 74 ) {
         _led1.green();
-        _led2.orange();
-        _led3.orange();
+        _led2.yellow();
+        _led3.yellow();
     } else  { //if (percent < 90 )
         _led1.green();
         _led2.green();
-        _led3.orange();
+        _led3.yellow();
     }
 
 }
