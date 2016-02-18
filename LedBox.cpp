@@ -6,9 +6,9 @@ void LedBox::hello()
 {
     uint16_t timeout = 500;
 
-    _led1.on();
-    _led2.on();
-    _led3.on();
+    _led1.off();
+    _led2.off();
+    _led3.off(); 
     delay(timeout);
     _led1.red();
     delay(timeout);
@@ -36,9 +36,9 @@ void LedBox::hello()
     delay(timeout);
     _led3.off();
     delay(timeout);
-    _led1.on();
-    _led2.on();
-    _led3.on();
+    _led1.off();
+    _led2.off();
+    _led3.off();
 
 }
 
