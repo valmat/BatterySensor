@@ -172,9 +172,9 @@ public:
     {}
 
     // Copy constructor
-    Battery( const Battery& ) = default;
+    Battery( const Battery& ) = delete;
     // Move constructor
-    Battery ( Battery && ) = default;
+    Battery ( Battery && ) = delete;
 
     BatteryState state()
     {

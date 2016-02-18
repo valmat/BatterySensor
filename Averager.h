@@ -24,19 +24,23 @@ public:
         if(total == _count) {
             // Когда массив заполнен полностью
             // Сдвигаем все влево
-            for(uint8_t i = 0; i < _count-1; i++) {
+            for(uint8_t i = 0; i < total-1; i++) {
                 _arr[i] = _arr[i+1];
             }
             _arr[total-1] = val;
         } else {
             // На стадии заполнения
-            _arr[_count++] = val;
+            _arr[_count] = val;
+            _count++;
         }
     }
 
     // Возвращает среднее
     uint16_t get() const
     {
+        if (0 == _count) {
+            return 0;
+        }
         uint16_t sum = 0;
         for(uint8_t i = 0; i < _count; i++) {
             sum +=_arr[i];
