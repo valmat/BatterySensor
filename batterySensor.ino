@@ -61,7 +61,7 @@ void setup()
     
     if (!bmp.begin()) {
         lcd.setCursor(0, 0);
-        lcd.print("Could not find a valid BMP085 sensor, check wiring!");
+        lcd.print("Check pres.sens.");
         while(1);
     }
 

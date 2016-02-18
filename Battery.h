@@ -138,10 +138,14 @@ private:
     constexpr static uint16_t pinResolution = 1024;
 
     // Падение напряжения на защитном диоде
-    constexpr static float diodeVoltage = 0.5;
+    // Расчетное значение 0.503
+    // Путем колибровки получено значение 0.503
+    constexpr static float diodeVoltage = 0.503;
 
     // Коэфициент преобразования определяемый резисторами делителя напряжения
-    constexpr static float resist = 3.0;
+    // Расчетное значение 3.0
+    // Путем колибровки получено значение 3.0534
+    constexpr static float resist = 3.0534;
 
 
     //

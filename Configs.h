@@ -52,7 +52,8 @@ struct Configs
 
     // Интервал проведения измерений погодных данных
     // 3с = 3000 милисекунд
-    constexpr static uint32_t MesureTimeout = 10000;
+    //constexpr static uint32_t MesureTimeout = 10000;
+    constexpr static uint32_t MesureTimeout = 3000;
 
     // Интервал переиндикации светодиодами состояния батареи
     constexpr static uint32_t LedTimeout = 301;

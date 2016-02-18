@@ -3,10 +3,10 @@
 
 void LCDwrapper::printFract(float val)
 {
-    val = round(val*10)/10;
-    uint8_t fract = round(10*(val - (int)val));
+    uint16_t intact = (int)val;
+    uint8_t fract = (uint8_t)(10.0*(val - (float)intact) + 0.5);
 
-    _lcd.print( (int)val );
+    _lcd.print( intact );
     _lcd.print( '.' );
     _lcd.print( fract );
 }
@@ -20,9 +20,10 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
 
     auto temperature = bmp.readTemperature();
     auto pressure = bmp.readPressure()/133.322368421;
-    
+
     _lcd.print("T:");
     printFract(temperature);
+
     // °C
     _lcd.print("\xDF");
     _lcd.print("C    ");
@@ -56,8 +57,8 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
     _lcd.print(":");
     _lcd.print( batState.raw() );
 
-    _lcd.print(":");
-    _lcd.print(percent );
+    //_lcd.print(":");
+    //_lcd.print(percent );
 
     _lcd.print(":");
     //_lcd.print( mesVoltage );
