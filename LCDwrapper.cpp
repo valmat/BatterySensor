@@ -43,7 +43,6 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
     _glyps.picD();
     _lcd.print(":");
     _lcd.print(round(pressure));
-    //_lcd.println(" MM PT.CT.");
     _lcd.print("MM  ");  
 
     
@@ -65,22 +64,30 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
     // Выводим значек батареи
     picBat(percent);
 
-    _lcd.print(":");
-    _lcd.print( batState.raw() );
+    //_lcd.print(":");
+    //_lcd.print( batState.raw() );
+
+    _lcd.print(" ");
+    _lcd.print(percent );
+    _lcd.print("%   ");
+
+    //_lcd.print(" ");
+    //_lcd.print( mesVoltage );
+    //printFract(mesVoltage);
 
     //_lcd.print(":");
-    //_lcd.print(percent );
-
-    _lcd.print(":");
-    //_lcd.print( mesVoltage );
-    printFract(mesVoltage);
-
-    _lcd.print(":");
+    if(calcVoltage < 10.0) {
+        _lcd.setCursor(10, 1);
+    } else {
+        _lcd.setCursor(9, 1);
+    }
+    
     //_lcd.print( calcVoltage );
     printFract(calcVoltage, 2);
+    _lcd.print(" B");
 
 
-    _lcd.print("    ");
+    //_lcd.print("    ");
     
 }
 
