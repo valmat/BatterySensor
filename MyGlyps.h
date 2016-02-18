@@ -7,12 +7,6 @@
 
 #include <LiquidCrystal.h>
 
-//#include <stdlib.h>
-//#include <stdbool.h>
-//#include <string.h>
-//#include "binary.h"
-
-
 class MyGlyps
 {
 public:

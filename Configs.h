@@ -52,7 +52,7 @@ struct Configs
 
     // Интервал проведения измерений погодных данных
     // 3с = 3000 милисекунд
-    constexpr static uint32_t MesureTimeout = 10000;
+    constexpr static uint32_t MesureTimeout = 5000;
 
     // Интервал переиндикации светодиодами состояния батареи
     constexpr static uint32_t LedTimeout = 401;
@@ -60,5 +60,9 @@ struct Configs
     // Время долгого удержания кнопки
     // Удержание кнопки в течении этого времени считается долгим
     constexpr static uint16_t longPressTime = 750;
+
+    // Количество хранимых в памяти последних значений с пина, снимающего напряжение на батареи
+    // для их последующего усреднения
+    constexpr static uint8_t batLastCount = 20;
 
 };

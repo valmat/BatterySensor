@@ -7,10 +7,10 @@
 #pragma once
 
 #include <Pino.h>
-#include <math.h>
+#include "Averager.h"
 
 // Forward declaration
-class Battery;
+template<uint8_t totalAvarage> class Battery;
 
 // Все вычесленные данные батареи
 class BatteryState
@@ -158,10 +158,11 @@ private:
     // Вычисляемое напряжение батареи
     float _calcVoltage;
 
+    template<uint8_t totalAvarage>
     friend class Battery;
 };
 
-
+template<uint8_t totalAvarage>
 class Battery
 {
 public:
@@ -175,13 +176,14 @@ public:
     // Move constructor
     Battery ( Battery && ) = default;
 
-    BatteryState state() const
+    BatteryState state()
     {
-        return BatteryState(_pin.read());
+        average.add(_pin.read());
+        return BatteryState(average.get());
     }
 
 private:
 
     Pino _pin;
-
+    Averager<totalAvarage> average;
 };

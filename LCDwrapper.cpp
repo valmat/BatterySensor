@@ -1,4 +1,4 @@
-#include "LCDwrapper.h"
+#include "includes.h"
 
 
 uint16_t LCDwrapper::pow10(uint8_t pow)
@@ -22,7 +22,7 @@ void LCDwrapper::printFract(float val, uint8_t pow)
     _lcd.print( fract );
 }
 
-void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
+void LCDwrapper::show(Adafruit_BMP085 &bmp, MyBattery &bat)
 {
     //
     // Печатаем погодные данные

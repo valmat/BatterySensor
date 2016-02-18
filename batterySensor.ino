@@ -1,24 +1,4 @@
-#include <Pino.h>
-#include <RBD_Timer.h>
-#include <RBD_Button.h>
-
-// Экран
-#include "LCDwrapper.h"
-
-// Управление светодиодами
-#include "MyRGB.h"
-#include "LedBox.h"
-
-
-// Bmp180 датчик температоуры и давления
-#include <Wire.h>
-#include <Adafruit_BMP085.h>
-
-// Состаяние аккомулятора
-#include "Battery.h"
-
-// Все настройки в.т.ч номера пинов в Configs.h
-#include "Configs.h"
+#include "includes.h"
 
     
 // Кнопка 
@@ -27,7 +7,7 @@ RBD::Button button(Configs::button);
 uint32_t buttonStart = 0;
 
 // Измерение значения на вольтметре
-Battery bat(Configs::voltagePin);
+MyBattery bat(Configs::voltagePin);
 
 
 // Инициализируем объект-экран, передаём использованные 

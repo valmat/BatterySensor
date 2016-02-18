@@ -7,22 +7,6 @@
  */
 #pragma once
 
-#include <LiquidCrystal.h>
-//#include <Pino.h>
-
-#include <math.h>
-
- // Дополнительные символы для LCD
-#include "MyGlyps.h"
-
-// Bmp180 датчик температоуры и давления
-#include <Wire.h>
-#include <Adafruit_BMP085.h>
-
-// Состаяние аккомулятора
-#include "Battery.h"
-
-
 
 class LCDwrapper
 {
@@ -47,7 +31,7 @@ public:
     LCDwrapper ( LCDwrapper && ) = default;
 
     // Отображает необходимую информацию
-    void show(Adafruit_BMP085 &bmp, Battery &bat);
+    void show(Adafruit_BMP085 &bmp, MyBattery &bat);
 
     LCDwrapper& setCursor(uint8_t row, uint8_t col)
     {
