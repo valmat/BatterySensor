@@ -1,10 +1,21 @@
 #include "LCDwrapper.h"
 
 
-void LCDwrapper::printFract(float val)
+uint16_t LCDwrapper::pow10(uint8_t pow)
+{
+    if(1 == pow) {
+        return 10;
+    } else if(pow > 1) {
+        return 10 * pow10(pow-1);
+    } else {
+        return 1;
+    }
+}
+
+void LCDwrapper::printFract(float val, uint8_t pow)
 {
     uint16_t intact = (int)val;
-    uint8_t fract = (uint8_t)(10.0*(val - (float)intact) + 0.5);
+    uint8_t fract = (uint8_t)( pow10(pow) * ( val - (float)intact ) + 0.5 );
 
     _lcd.print( intact );
     _lcd.print( '.' );
@@ -66,7 +77,7 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
 
     _lcd.print(":");
     //_lcd.print( calcVoltage );
-    printFract(calcVoltage);
+    printFract(calcVoltage, 2);
 
 
     _lcd.print("    ");

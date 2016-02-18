@@ -77,7 +77,8 @@ public:
 
 private:
 
-    void printFract(float val);
+    void printFract(float val, uint8_t pow = 1);
+    uint16_t pow10(uint8_t pow);
 
 
     // объект-экран
