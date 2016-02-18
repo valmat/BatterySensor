@@ -46,8 +46,8 @@ RBD::Timer MesureTimer;
 RBD::Timer LedTimer;
 
 // Rgb leds
-MyRGB led1(Configs::led1R, Configs::led1G, Configs::led1B), 
-      led2(Configs::led2R, Configs::led2G, Configs::led2B), 
+MyRGB led1(Configs::led1R, Configs::led1G, Configs::led1B),
+      led2(Configs::led2R, Configs::led2G, Configs::led2B),
       led3(Configs::led3R, Configs::led3G, Configs::led3B);
 
 LedBox leds(led1, led2, led3);
