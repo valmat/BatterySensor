@@ -52,6 +52,11 @@ void LedBox::showBat(uint8_t percent)
         _led1.blue();
         _led2.blue();
         _led3.blue();
+    } else if (percent == 0) {
+        // Подано слишком низкое питание
+        _led1.purple();
+        _led2.purple();
+        _led3.purple();
     } else if (percent >= 90) {
         // full
         _led1.green();
@@ -64,8 +69,6 @@ void LedBox::showBat(uint8_t percent)
         _led1.red();
         _led2.red();
         _led3.red();
-        
-        
     } else if (percent < 26 ) {
         _led1.yellow();
         _led2.red();
