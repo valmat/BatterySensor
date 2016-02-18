@@ -28,8 +28,8 @@ struct Configs
     constexpr static uint8_t lcdE       = 7;
     constexpr static uint8_t lcdDB4     = 8;
     constexpr static uint8_t lcdDB5     = 12;
-    constexpr static uint8_t lcdDB6     = 14;
-    constexpr static uint8_t lcdDB7     = 15;
+    constexpr static uint8_t lcdDB6     = 14;   //A0
+    constexpr static uint8_t lcdDB7     = 15;   //A1
     constexpr static uint8_t lcdLight   = 13;
 
     // Leds configs
@@ -37,13 +37,13 @@ struct Configs
     constexpr static uint8_t led1G = 9;
     constexpr static uint8_t led1B = 0;
     
-    constexpr static uint8_t led2R = 5;
-    constexpr static uint8_t led2G = 10;
-    constexpr static uint8_t led2B = 16;    // A2
+    constexpr static uint8_t led2R = 6;
+    constexpr static uint8_t led2G = 11;
+    constexpr static uint8_t led2B = 1;
     
-    constexpr static uint8_t led3R = 6;
-    constexpr static uint8_t led3G = 11;
-    constexpr static uint8_t led3B = 1;
+    constexpr static uint8_t led3R = 5;
+    constexpr static uint8_t led3G = 10;
+    constexpr static uint8_t led3B = 16;    // A2
 
     // Raw voltage pin
     // See ~/opt/arduino-1.6.6/hardware/arduino/avr/variants/standard/pins_arduino.h
