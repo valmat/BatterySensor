@@ -57,38 +57,23 @@ void LCDwrapper::show(Adafruit_BMP085 &bmp, Battery &bat)
     // Проценты
     auto percent     = batState.percent();
 
-
-    //lcd.clear();
+    // значёк батареи
     _lcd.setCursor(0, 1);
-    
-    // Выводим значек батареи
     picBat(percent);
 
-    //_lcd.print(":");
-    //_lcd.print( batState.raw() );
-
+    // %
     _lcd.print(" ");
     _lcd.print(percent );
     _lcd.print("%   ");
 
-    //_lcd.print(" ");
-    //_lcd.print( mesVoltage );
-    //printFract(mesVoltage);
-
-    //_lcd.print(":");
+    // Напряжение
     if(calcVoltage < 10.0) {
         _lcd.setCursor(10, 1);
     } else {
         _lcd.setCursor(9, 1);
     }
-    
-    //_lcd.print( calcVoltage );
     printFract(calcVoltage, 2);
     _lcd.print(" B");
-
-
-    //_lcd.print("    ");
-    
 }
 
 void LCDwrapper::picBat(uint8_t percent)
