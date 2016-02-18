@@ -12,7 +12,7 @@ struct Configs
     // Button pin nom
     constexpr static uint8_t button = 2;
     // Button Debounce Timeout
-    constexpr static uint8_t buttonDebounce = 30;
+    constexpr static uint8_t buttonDebounce = 70;
 
     // Инициализируем объект-экран, передаём использованные 
     // для подключения контакты на Arduino в порядке:
