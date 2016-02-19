@@ -41,7 +41,7 @@ public:
         if (0 == _count) {
             return 0;
         }
-        uint16_t sum = 0;
+        uint32_t sum = 0;
         for(uint8_t i = 0; i < _count; i++) {
             sum +=_arr[i];
         }

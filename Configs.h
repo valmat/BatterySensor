@@ -51,6 +51,7 @@ struct Configs
     constexpr static uint8_t voltagePin = 20;
 
     // Интервал проведения измерений погодных данных
+    // (интервал обновления информации на LCD)
     // 3с = 3000 милисекунд
     constexpr static uint32_t MesureTimeout = 5000;
 
@@ -63,6 +64,8 @@ struct Configs
 
     // Количество хранимых в памяти последних значений с пина, снимающего напряжение на батареи
     // для их последующего усреднения
-    constexpr static uint8_t batLastCount = 20;
+    // При LedTimeout == 401, значение batLastCount == 150 будет соответствовать 
+    // усреднению за примерно одну минуту (60000/401 = 149.63)
+    constexpr static uint8_t batLastCount = 150;
 
 };
