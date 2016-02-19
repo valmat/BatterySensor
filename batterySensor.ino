@@ -72,9 +72,9 @@ void loop()
     // Из-за глюка в RBD::Button нужно проверять была ли кнопка предварительно нажата
     if(buttonStart > 0 && button.onReleased()) {
         if( millis() - buttonStart < Configs::longPressTime) {
-            lcd.toogleLight();
+            leds.toogle();
         } else {
-           leds.toogle();
+            lcd.toogleLight();
         }
         // Сбрасываем флаг нажатости
         buttonStart = 0;
