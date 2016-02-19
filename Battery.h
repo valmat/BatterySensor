@@ -10,7 +10,7 @@
 #include "Averager.h"
 
 // Forward declaration
-template<uint8_t totalAvarage> class Battery;
+template<uint16_t totalAvarage> class Battery;
 
 // Все вычесленные данные батареи
 class BatteryState
@@ -158,11 +158,11 @@ private:
     // Вычисляемое напряжение батареи
     float _calcVoltage;
 
-    template<uint8_t totalAvarage>
+    template<uint16_t totalAvarage>
     friend class Battery;
 };
 
-template<uint8_t totalAvarage>
+template<uint16_t totalAvarage>
 class Battery
 {
 public:
