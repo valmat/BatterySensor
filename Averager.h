@@ -6,7 +6,7 @@
 
 #pragma once
 
-template<uint8_t total>
+template<uint16_t total>
 class Averager
 {
 public:
